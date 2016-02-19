@@ -4,21 +4,35 @@
 <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" type="text/css"/>
 <link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css" type="text/css"  />
 <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" type="text/css" />
-<script type="text/javascript src="phonegap.js"></script>
+<script type="text/javascript" src="phonegap.js"></script>
 <script type="text/javascript" src="js/jquery-2.2.0.min.js" ></script>
 <script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js" ></script>
 
 <script type="text/javascript">
 var destinationType;
 
-$("document").ready(function inicio(){
+//$("document").ready(function inicio(){
+document.addEventListener("deviceready", onDeviceReady, false);
 
+function onDeviceReady(){
 $("#btncamara").tap(function pulsacion(){
-alert("ejecucion correcta");
-navigator.camera.getPicture(satisfactorio ,error , {quality:50, allowEdit:true,destinationType: destinationType.DATA_URL});
-});
+
+navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+    destinationType: Camera.DestinationType.FILE_URI });
+
+function onSuccess(imageURI) {
+    var image = document.getElementById('myImage');
+    image.src = imageURI;
+}
+
+function onFail(message) {
+    alert('Failed because: ' + message);
+}
+
 
 });
+
+}
 </script>
 <style type="text/css">
 #encabezado{
@@ -41,17 +55,15 @@ font-weight:bold;
 		<h1>Mi aplicación</h1>
 	</div>
 	<div data-role="content">
-	<input type="button" value="acceder camara" id="btncamara"/>
-	
-
-
-</div>
+	<input type="button" value="Acceder a camara" id="btncamara"/>
+        <img src="" id="myImage">
+        </div>   
 	<div data-role="footer">
-		<div data-role"controlgroup" data-type="horizontal">
+        <div data-role="controlgroup" data-type="horizontal">
         
-           <a href="#segunda" class"ui-btn ui-icon-info ui-icon-left">Abrir</a>
-           <a href="#" class"ui-btn">Facebook</a>
-           <a href="#" class"ui-btn">Twiter</a>
+           <a href="#segunda" class="ui-btn ui-icon-info ui-icon-left">Abrir</a>
+           <a href="#" class="ui-btn" href="www.facebook.com">Facebook</a>
+           <a href="#" class="ui-btn" >Twiter</a>
   
 
 	</div>
